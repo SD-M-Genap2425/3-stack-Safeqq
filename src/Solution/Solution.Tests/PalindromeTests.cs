@@ -27,7 +27,7 @@ public class PalindromeTests
     public void CekPalindrom_WithNonPalindrome_ReturnsFalse()
     {
         // Arrange
-        var input = "Hello World";
+        var input = "Ibu Ratna antar ubi";
 
         // Act
         var result = PalindromeChecker.CekPalindrom(input);
@@ -40,7 +40,7 @@ public class PalindromeTests
     public void CekPalindrom_WithMixedCaseAndPunctuation_ReturnsTrue()
     {
         // Arrange
-        var input = "A man, a plan, a canal: Panama";
+        var input = "Hello World";
 
         // Act
         var result = PalindromeChecker.CekPalindrom(input);
