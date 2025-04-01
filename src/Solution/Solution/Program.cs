@@ -15,10 +15,6 @@ internal class Program
         Console.WriteLine("Halaman saat ini: " + historyManager.LihatHalamanSaatIni());
         Console.WriteLine("Kembali ke halaman sebelumnya...");
         Console.WriteLine("Halaman saat ini: " + historyManager.Kembali());
-        Console.WriteLine("Kembali ke halaman sebelumnya...");
-        Console.WriteLine("Halaman saat ini: " + historyManager.Kembali()); 
-        Console.WriteLine("Kembali ke halaman sebelumnya...");
-        Console.WriteLine(historyManager.Kembali());  
         historyManager.TampilkanHistory();
 
 
