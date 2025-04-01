@@ -24,7 +24,7 @@ public class PalindromeTests
     }
 
     [TestMethod]
-    public void CekPalindrom_WithNonPalindrome_ReturnsFalse()
+    public void CekPalindrom_WithMixedCaseAndPunctuation_ReturnsTrue()
     {
         // Arrange
         var input = "Ibu Ratna antar ubi";
@@ -33,11 +33,11 @@ public class PalindromeTests
         var result = PalindromeChecker.CekPalindrom(input);
 
         // Assert
-        Assert.IsFalse(result);
+        Assert.IsTrue(result);
     }
 
     [TestMethod]
-    public void CekPalindrom_WithMixedCaseAndPunctuation_ReturnsTrue()
+    public void CekPalindrom_WithNonPalindrome_ReturnsFalse()
     {
         // Arrange
         var input = "Hello World";
@@ -46,7 +46,7 @@ public class PalindromeTests
         var result = PalindromeChecker.CekPalindrom(input);
 
         // Assert
-        Assert.IsTrue(result);
+        Assert.IsFalse(result);
     }
 
     [TestMethod]
