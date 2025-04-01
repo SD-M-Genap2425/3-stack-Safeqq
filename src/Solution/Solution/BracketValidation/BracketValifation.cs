@@ -5,10 +5,10 @@ namespace Solution.BracketValidation
 {
     public class BracketValidator
     {
-        private LinkedList<char> stack = new LinkedList<char>();
-
         public bool ValidasiEkspresi(string ekspresi)
         {
+            var stack = new LinkedList<char>();
+
             foreach (var ch in ekspresi)
             {
                 if (ch == '(' || ch == '{' || ch == '[')
@@ -17,19 +17,24 @@ namespace Solution.BracketValidation
                 }
                 else if (ch == ')' || ch == '}' || ch == ']')
                 {
-                    if (stack.Count == 0) return false;
-                    var last = stack.Last.Value;
-                    if ((ch == ')' && last == '(') || (ch == '}' && last == '{') || (ch == ']' && last == '['))
-                    {
-                        stack.RemoveLast();
-                    }
-                    else
-                    {
+                    if (stack.Count == 0)
                         return false;
-                    }
+
+                    var top = stack.Last.Value;
+                    stack.RemoveLast();
+
+                    if (!IsValidPair(top, ch))
+                        return false;
                 }
             }
+
             return stack.Count == 0;
+        }
+        private bool IsValidPair(char opening, char closing)
+        {
+            return (opening == '(' && closing == ')') ||
+                   (opening == '{' && closing == '}') ||
+                   (opening == '[' && closing == ']');
         }
     }
 }

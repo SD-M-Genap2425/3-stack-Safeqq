@@ -6,6 +6,7 @@ namespace Solution.BrowserHistory
     public class Halaman
     {
         public string URL { get; set; }
+
         public Halaman(string url)
         {
             URL = url;
@@ -14,53 +15,45 @@ namespace Solution.BrowserHistory
     public class HistoryManager
     {
         private LinkedList<Halaman> history = new LinkedList<Halaman>();
-        private LinkedListNode<Halaman> currentPage = null;
-
+        private LinkedListNode<Halaman> current;
         public void KunjungiHalaman(string url)
         {
-            var halamanBaru = new Halaman(url);
-            if (currentPage != null)
+            var halaman = new Halaman(url);
+            if (current != null)
             {
-                var nextPages = currentPage.Next;
-                while (nextPages != null)
+                var node = current.Next;
+                while (node != null)
                 {
-                    history.Remove(nextPages);
-                    nextPages = nextPages.Next;
+                    var nextNode = node.Next;
+                    history.Remove(node);
+                    node = nextNode;
                 }
             }
-            history.AddLast(halamanBaru);
-            currentPage = history.Last;
-            Console.WriteLine($"Mengunjungi halaman: {url}");
-        }
 
+            history.AddLast(halaman);
+            current = history.Last;
+        }
         public string Kembali()
         {
-            if (currentPage?.Previous != null)
-            {
-                currentPage = currentPage.Previous;
-                return currentPage.Value.URL;
-            }
-            else
-            {
+            if (current?.Previous == null)
                 return "Tidak ada halaman sebelumnya.";
-            }
-        }
 
+            current = current.Previous;
+            return current.Value.URL;
+        }
         public string LihatHalamanSaatIni()
         {
-            return currentPage?.Value.URL ?? "Tidak ada halaman yang dikunjungi.";
+            return current?.Value.URL ?? "Tidak ada halaman yang dikunjungi.";
         }
-
         public void TampilkanHistory()
         {
             if (history.Count == 0)
             {
-                Console.WriteLine("Tidak ada riwayat.");
+                Console.WriteLine("Tidak ada history.");
                 return;
             }
 
-            Console.WriteLine("Menampilkan history:");
-            var index = 1;
+            int index = 1;
             foreach (var halaman in history.Reverse())
             {
                 Console.WriteLine($"{index}. {halaman.URL}");

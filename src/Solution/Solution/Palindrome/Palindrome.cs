@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Solution.Palindrome
 {
@@ -8,22 +7,23 @@ namespace Solution.Palindrome
     {
         public static bool CekPalindrom(string input)
         {
+            var normalizedInput = new string(input
+                .Where(c => Char.IsLetterOrDigit(c))
+                .Select(c => Char.ToLower(c))
+                .ToArray());
+
             var stack = new Stack<char>();
-            var cleanedInput = string.Concat(input.Where(c => char.IsLetterOrDigit(c)).Select(c => char.ToLower(c)));
-
-            foreach (var ch in cleanedInput)
+            
+            foreach (var c in normalizedInput)
             {
-                stack.Push(ch);
+                stack.Push(c);
             }
 
-            foreach (var ch in cleanedInput)
+            foreach (var c in normalizedInput)
             {
-                if (stack.Pop() != ch)
-                {
+                if (c != stack.Pop())
                     return false;
-                }
             }
-
             return true;
         }
     }
